@@ -1,4 +1,4 @@
-package agh.ics.oop;
+package agh.ics.oop.model;
 
 public class Vector2d {
     private final int x;
@@ -34,8 +34,8 @@ public class Vector2d {
     public Vector2d lowerLeft(Vector2d other) {
         return new Vector2d(Math.min(other.x, x), Math.min(other.y, y));
     }
-    public Vector2d opposite(Vector2d other) {
-        return new Vector2d(-other.x, -other.y);
+    public Vector2d opposite() {
+        return new Vector2d(-x, -y);
     }
     public boolean equals(Object other){
         Vector2d otherVector = (Vector2d) other;
