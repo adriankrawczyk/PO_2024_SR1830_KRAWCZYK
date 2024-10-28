@@ -41,4 +41,7 @@ public class Vector2d {
         Vector2d otherVector = (Vector2d) other;
         return x == otherVector.x && y == otherVector.y;
     }
+    public boolean isInBounds(){
+        return x >= 0 && x <= 4 && y >= 0 && y <= 4;
+    }
 }
