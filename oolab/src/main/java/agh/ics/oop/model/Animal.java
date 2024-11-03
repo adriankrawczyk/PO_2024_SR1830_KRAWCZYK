@@ -1,5 +1,7 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.util.MoveValidator;
+
 public class Animal {
     private MapDirection direction = MapDirection.NORTH;
     private Vector2d position;
@@ -30,14 +32,12 @@ public class Animal {
         this.position = position;
     }
     public String toString() {
-        return "(" + this.position.getX() + ", "
-                + this.position.getY() + ") " + this.getDirection().toString();
+        return this.getDirection().toString();
     }
     public boolean isAt(Vector2d other){
         return other.getX() == this.position.getX() && other.getY() == this.position.getY();
     }
-    public void move(MoveDirection direction){
-
+    public void move(MoveDirection direction, MoveValidator moveValidator){
         Vector2d movedVector = this.position;
         switch (direction){
             case MoveDirection.RIGHT -> this.setDirection(this.direction.next());
@@ -45,7 +45,7 @@ public class Animal {
             case MoveDirection.FORWARD -> movedVector = this.position.add(this.direction.toUnitVector());
             case MoveDirection.BACKWARD -> movedVector = this.position.subtract(this.direction.toUnitVector());
         }
-        if (movedVector.isInBounds()) {
+        if (moveValidator.canMoveTo(movedVector)) {
             this.setPosition(movedVector);
         }
     }
