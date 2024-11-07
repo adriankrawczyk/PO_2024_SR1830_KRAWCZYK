@@ -1,8 +1,13 @@
 package agh.ics.oop.model;
 
+import java.util.Objects;
+
 public class Vector2d {
     private final int x;
     private final int y;
+    private final static Vector2d leftDownCorner = new Vector2d(0,0);
+    private final static Vector2d topRightCorner = new Vector2d(4,4);
+
     public Vector2d(int x, int y){
         this.x = x;
         this.y = y;
@@ -37,11 +42,16 @@ public class Vector2d {
     public Vector2d opposite() {
         return new Vector2d(-x, -y);
     }
+    @Override
     public boolean equals(Object other){
-        Vector2d otherVector = (Vector2d) other;
+        if (!(other instanceof Vector2d otherVector)){ return false;}
         return x == otherVector.x && y == otherVector.y;
     }
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
     public boolean isInBounds(){
-        return x >= 0 && x <= 4 && y >= 0 && y <= 4;
+        return follows(leftDownCorner) && precedes(topRightCorner);
     }
 }

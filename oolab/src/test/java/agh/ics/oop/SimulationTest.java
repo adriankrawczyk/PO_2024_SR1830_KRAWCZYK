@@ -1,9 +1,6 @@
 package agh.ics.oop;
 
-import agh.ics.oop.model.Animal;
-import agh.ics.oop.model.MapDirection;
-import agh.ics.oop.model.MoveDirection;
-import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -16,7 +13,8 @@ public class SimulationTest {
     public void rightDirection(){
         ArrayList<Vector2d> positions = new ArrayList<>(Arrays.asList(new Vector2d(2, 2), new Vector2d(1, 1)));
         ArrayList<MoveDirection> directions = OptionsParser.parse(new String[]{"l", "r", "l", "r", "l"});
-        Simulation simulation = new Simulation(positions, directions);
+        RectangularMap rectangularMap = new RectangularMap(4,4);
+        Simulation simulation = new Simulation(positions, directions,rectangularMap);
 
         simulation.run();
         ArrayList<Animal> animals = simulation.getAnimals();
@@ -30,7 +28,8 @@ public class SimulationTest {
     public void rightPosition(){
         ArrayList<Vector2d> positions = new ArrayList<>(Arrays.asList(new Vector2d(0, 0), new Vector2d(4, 4)));
         ArrayList<MoveDirection> directions = OptionsParser.parse(new String[]{"f", "b", "r", "l", "f", "f"});
-        Simulation simulation = new Simulation(positions, directions);
+        RectangularMap rectangularMap = new RectangularMap(4,4);
+        Simulation simulation = new Simulation(positions, directions,rectangularMap);
 
         simulation.run();
         ArrayList<Animal> animals = simulation.getAnimals();
@@ -43,11 +42,11 @@ public class SimulationTest {
     public void mapCorner(){
         ArrayList<Vector2d> positions = new ArrayList<>(Arrays.asList(new Vector2d(0, 0), new Vector2d(4, 4)));
         ArrayList<MoveDirection> directions = OptionsParser.parse(new String[]{"b", "f", "b", "f"});
-        Simulation simulation = new Simulation(positions, directions);
+        RectangularMap rectangularMap = new RectangularMap(4,4);
+        Simulation simulation = new Simulation(positions, directions,rectangularMap);
 
         simulation.run();
         ArrayList<Animal> animals = simulation.getAnimals();
-
         assertEquals(animals.get(0).getPosition(), new Vector2d(0, 0));
         assertEquals(animals.get(1).getPosition(), new Vector2d(4, 4));
     }
