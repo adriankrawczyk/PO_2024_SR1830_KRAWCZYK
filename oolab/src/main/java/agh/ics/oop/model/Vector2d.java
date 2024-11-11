@@ -5,8 +5,7 @@ import java.util.Objects;
 public class Vector2d {
     private final int x;
     private final int y;
-    private final static Vector2d leftDownCorner = new Vector2d(0,0);
-    private final static Vector2d topRightCorner = new Vector2d(4,4);
+
 
     public Vector2d(int x, int y){
         this.x = x;
@@ -51,7 +50,7 @@ public class Vector2d {
     public int hashCode() {
         return Objects.hash(x, y);
     }
-    public boolean isInBounds(){
-        return follows(leftDownCorner) && precedes(topRightCorner);
+    public boolean isInBounds(Vector2d lowerLeft, Vector2d upperRight){
+        return follows(lowerLeft) && precedes(upperRight);
     }
 }

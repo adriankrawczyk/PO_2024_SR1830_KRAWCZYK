@@ -13,8 +13,8 @@ public class SimulationTest {
     public void rightDirection(){
         ArrayList<Vector2d> positions = new ArrayList<>(Arrays.asList(new Vector2d(2, 2), new Vector2d(1, 1)));
         ArrayList<MoveDirection> directions = OptionsParser.parse(new String[]{"l", "r", "l", "r", "l"});
-        RectangularMap rectangularMap = new RectangularMap(4,4);
-        Simulation simulation = new Simulation(positions, directions,rectangularMap);
+        AbstractWorldMap abstractWorldMap = new AbstractWorldMap();
+        Simulation simulation = new Simulation(positions, directions,abstractWorldMap);
 
         simulation.run();
         ArrayList<Animal> animals = simulation.getAnimals();
@@ -28,8 +28,8 @@ public class SimulationTest {
     public void rightPosition(){
         ArrayList<Vector2d> positions = new ArrayList<>(Arrays.asList(new Vector2d(0, 0), new Vector2d(4, 4)));
         ArrayList<MoveDirection> directions = OptionsParser.parse(new String[]{"f", "b", "r", "l", "f", "f"});
-        RectangularMap rectangularMap = new RectangularMap(4,4);
-        Simulation simulation = new Simulation(positions, directions,rectangularMap);
+        AbstractWorldMap abstractWorldMap = new AbstractWorldMap();
+        Simulation simulation = new Simulation(positions, directions,abstractWorldMap);
 
         simulation.run();
         ArrayList<Animal> animals = simulation.getAnimals();
@@ -42,8 +42,9 @@ public class SimulationTest {
     public void mapCorner(){
         ArrayList<Vector2d> positions = new ArrayList<>(Arrays.asList(new Vector2d(0, 0), new Vector2d(4, 4)));
         ArrayList<MoveDirection> directions = OptionsParser.parse(new String[]{"b", "f", "b", "f"});
-        RectangularMap rectangularMap = new RectangularMap(4,4);
-        Simulation simulation = new Simulation(positions, directions,rectangularMap);
+        AbstractWorldMap abstractWorldMap = new AbstractWorldMap();
+        Simulation simulation = new Simulation(positions, directions,abstractWorldMap);
+
 
         simulation.run();
         ArrayList<Animal> animals = simulation.getAnimals();

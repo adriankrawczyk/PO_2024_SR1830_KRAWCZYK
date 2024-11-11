@@ -8,12 +8,17 @@ import java.util.HashMap;
 public class Simulation {
     private ArrayList<MoveDirection> directions = new ArrayList<>();
     private final ArrayList<Animal> animals = new ArrayList<>();
-    private final RectangularMap rectangularMap;
-    public Simulation(ArrayList<Vector2d> positions, ArrayList<MoveDirection> directions, RectangularMap rectangularMap){
-        this.rectangularMap = rectangularMap;
+    private final AbstractWorldMap abstractWorldMap;
+    public Simulation(ArrayList<Vector2d> positions, ArrayList<MoveDirection> directions, AbstractWorldMap abstractWorldMap){
+        this.abstractWorldMap = abstractWorldMap;
+        abstractWorldMap.setGrasses(new GrassField(10).getGrasses());
+        for (HashMap.Entry<Vector2d, Grass> entry : abstractWorldMap.getGrasses().entrySet()) {
+            abstractWorldMap.place(entry.getValue());
+        }
+
         for(Vector2d position : positions){
             Animal animal = new Animal(position);
-            if (rectangularMap.place(animal)) {
+            if (abstractWorldMap.place(animal)) {
                 animals.add(animal);
             }
         }
@@ -22,15 +27,10 @@ public class Simulation {
     public ArrayList<Animal> getAnimals() {
         return this.animals;
     }
-    public void run(){
-        int len = animals.size();
-        int i = 0;
-        for(MoveDirection direction: directions){
-            Animal animal = animals.get(i);
-            rectangularMap.move(animal, direction);
-            System.out.println(rectangularMap);
-            i++;
-            if(len == i) i = 0;
+    public void run() {
+        for (int i = 0; i < directions.size(); i++) {
+            abstractWorldMap.move(animals.get(i % animals.size()), directions.get(i));
+            System.out.println(abstractWorldMap);
         }
     }
 }
