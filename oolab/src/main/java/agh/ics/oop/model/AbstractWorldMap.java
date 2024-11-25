@@ -47,19 +47,29 @@ public class AbstractWorldMap implements WorldMap {
         return position.isInBounds(getBoundary().getLowerLeft(), getBoundary().getUpperRight()) && !isOccupied(position);
     }
 
+    public <T> boolean placeObject(T object, HashMap<Vector2d, T> map) {
+        try {
+            WorldElement worldElement = (WorldElement) object;
+            Vector2d position = worldElement.getPosition();
+            if (!canMoveTo(position)) {
+                throw new IncorrectPositionException(position);
+            }
+            map.put(position, object);
+            return true;
+        } catch (IncorrectPositionException e) {
+            return false;
+        }
+    }
     @Override
     public boolean place(Animal animal) {
-        Vector2d animalPosition = animal.getPosition();
-        if (!canMoveTo(animalPosition)) return false;
-        animals.put(animalPosition, animal);
-        return true;
+        return placeObject(animal, animals);
     }
+
     public boolean place(Grass grass) {
-        Vector2d grassPosition = grass.getPosition();
-        if (!canMoveTo(grassPosition)) return false;
-        grasses.put(grassPosition, grass);
-        return true;
+        return placeObject(grass, grasses);
     }
+
+
     public HashMap<Vector2d, WorldElement> getElements() {
         return new HashMap<Vector2d, WorldElement>() {{ putAll(animals); putAll(grasses); }};
     }
