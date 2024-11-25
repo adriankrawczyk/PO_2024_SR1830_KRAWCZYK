@@ -30,7 +30,6 @@ public class Simulation {
     public void run() {
         for (int i = 0; i < directions.size(); i++) {
             abstractWorldMap.move(animals.get(i % animals.size()), directions.get(i));
-            System.out.println(abstractWorldMap);
         }
     }
 }
