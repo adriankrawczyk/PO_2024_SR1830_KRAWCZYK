@@ -12,7 +12,7 @@ public class OptionsParser {
                     case "b" -> md.add(MoveDirection.BACKWARD);
                     case "r" -> md.add(MoveDirection.RIGHT);
                     case "l" -> md.add(MoveDirection.LEFT);
-                    default -> throw new IllegalArgumentException(arg + " nie jest odpowiednim ruchem zwierzęcia");
+                    default -> throw new IllegalArgumentException(arg + " nie jest odpowiednim ruchem zwierzecia");
                     }
                 }
             return md;
