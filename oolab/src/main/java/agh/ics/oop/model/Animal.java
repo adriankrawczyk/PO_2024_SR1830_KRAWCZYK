@@ -1,8 +1,9 @@
 package agh.ics.oop.model;
 
 import agh.ics.oop.model.util.MoveValidator;
+import agh.ics.oop.model.util.WorldElement;
 
-public class Animal {
+public class Animal implements WorldElement {
     private MapDirection direction = MapDirection.NORTH;
     private Vector2d position;
 
