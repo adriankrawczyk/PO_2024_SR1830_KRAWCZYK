@@ -20,4 +20,4 @@ public class ConsoleMapDisplay implements MapChangeListener {
         System.out.println("Ilosc zmian: " + updateCount);
         System.out.println("==================");
     }
-}//
+}
