@@ -15,7 +15,10 @@ public class AbstractWorldMap implements WorldMap {
     private HashMap<Vector2d, Grass> grasses = new HashMap<>();
     private final MapVisualizer visualizer = new MapVisualizer(this);
     private final List<MapChangeListener> observers = new ArrayList<>();
-
+    private int id;
+    public AbstractWorldMap(int id) {
+        this.id = id;
+    }
     public String toString() {
         return visualizer.draw(getBoundary().lowerLeft(), getBoundary().upperRight());
     }
@@ -27,7 +30,9 @@ public class AbstractWorldMap implements WorldMap {
     public HashMap<Vector2d, Grass> getGrasses() {
         return grasses;
     }
-
+    public int getId(){
+        return id;
+    }
     @Override
     public void move(Animal animal, MoveDirection direction) {
         Vector2d oldPosition = animal.getPosition();
