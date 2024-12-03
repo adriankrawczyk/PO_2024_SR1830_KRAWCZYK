@@ -15,9 +15,12 @@ public class AbstractWorldMap implements WorldMap {
     private HashMap<Vector2d, Grass> grasses = new HashMap<>();
     private final MapVisualizer visualizer = new MapVisualizer(this);
     private final List<MapChangeListener> observers = new ArrayList<>();
-
+    private int id;
+    public AbstractWorldMap(int id) {
+        this.id = id;
+    }
     public String toString() {
-        return visualizer.draw(getBoundary().getLowerLeft(), getBoundary().getUpperRight());
+        return visualizer.draw(getBoundary().lowerLeft(), getBoundary().upperRight());
     }
 
     public void setGrasses(HashMap<Vector2d, Grass> grasses) {
@@ -27,7 +30,9 @@ public class AbstractWorldMap implements WorldMap {
     public HashMap<Vector2d, Grass> getGrasses() {
         return grasses;
     }
-
+    public int getId(){
+        return id;
+    }
     @Override
     public void move(Animal animal, MoveDirection direction) {
         Vector2d oldPosition = animal.getPosition();
@@ -52,7 +57,7 @@ public class AbstractWorldMap implements WorldMap {
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        return position.isInBounds(getBoundary().getLowerLeft(), getBoundary().getUpperRight()) && !isOccupied(position);
+        return position.isInBounds(getBoundary().lowerLeft(), getBoundary().upperRight()) && !isOccupied(position);
     }
 
     public <T> boolean placeObject(T object, HashMap<Vector2d, T> map) {
@@ -104,6 +109,7 @@ public class AbstractWorldMap implements WorldMap {
                 new Vector2d(bounds[2], bounds[3])
         );
     }
+
     public void addObserver(MapChangeListener observer) {
         observers.add(observer);
     }
